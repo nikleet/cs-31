@@ -1,0 +1,181 @@
+CS 31, Project 4, array.cpp
+Name: Niklas Leet
+UID: 405795083
+Date: 2/19/2023
+
+Project 4 Report
+
+a.  I did not encounter too many obstacles with this project, although my
+    original implementation of the shiftLeft function had some issues and I ran
+    into a segmentation fault while debugging my code. My original 
+    implementation of the shiftLeft function relied on looping through the
+    array right to left starting at n, but this had the unintended effect of 
+    reversing the order of the elements that were shifted. I fixed this simply
+    by changing my approach and looping left to right. The segmentation fault
+    I encountered was caused by a few missing commas in array declarations
+    within my driver code that I used for debugging. Otherwise, I did not
+    encounter any more issues.
+
+b. Test cases:
+
+    // =========================================================================
+    // test locateMaximum 
+
+    string arr1[] = {"a", "d", "c", "b"};
+    assert(locateMaximum(arr1, 4) == 1); // test basic functionality
+    
+    string arr2[] = {"a", "d", "c", "d"};
+    assert(locateMaximum(arr2, 4) == 1); // test duplicate max value (returns lower index)
+
+    string arr3[] = {"a", "b", "c", "d"};
+    assert(locateMaximum(arr3, 3) == 2); // find max among first 3 values only
+
+    assert(locateMaximum(arr3, -2) == -1);
+    assert(locateMaximum(arr3, 0) == -1); // return -1 for invalid n
+
+    string arr4[] = {"a", "b", "c", "d"};
+    assert(locateMaximum(arr4, 3) == 2); // find max among first 3 values only
+
+    string arr5[] = {"Z", "Z", "a", "Z"};
+    assert(locateMaximum(arr5, 4) == 2); // find max among capitals
+
+    string arr6[] = {"b", "", "", "a"};
+    assert(locateMaximum(arr6, 4) == 0); // find max among some empty strings
+
+    string arr7[] = {"", "", "", ""};
+    assert(locateMaximum(arr7, 4) == 0); // find max among all empty strings
+    
+    // =========================================================================
+    // test countFloatingPointValues
+
+    string arr8[] = {"a", "d", "c", "b"};
+    assert(countFloatingPointValues(arr8, 4) == 0); // test with no floats
+
+    string arr9[] = {"a", "0.1", "c", "b"};
+    assert(countFloatingPointValues(arr9, 4) == 1); // test with one float
+
+    string arr10[] = {"a", "0.1", "00.02", "d"};
+    assert(countFloatingPointValues(arr10, 4) == 2); // test multiple float + leading zero
+
+    string arr11[] = {"0.000.1", "12304044.", "0.001", "aasdf", "20.02"}; 
+    assert(countFloatingPointValues(arr11, 5) == 3); // test multiple decimals and no trailing zeroes
+
+    string arr12[] = {"0.000.1", "+12304044.", "0.001", "aasdf", "20.0a2"}; 
+    assert(countFloatingPointValues(arr12, 5) == 1); // test characters in string
+
+    string arr13[] = {"0.000.1", "12304044.", "0.001", "aasdf", ".002"}; 
+    assert(countFloatingPointValues(arr13, 2) == 1); // test first 2 values
+
+    string arr14[] = {"0.000.1", "12304044.", "0.001", "aasdf", ".002"}; 
+    assert(countFloatingPointValues(arr14, 3) == 2); // test first 3 values
+
+    assert(countFloatingPointValues(arr14, -2) == -1);
+    assert(countFloatingPointValues(arr14, 0) == -1); // return -1 for invalid n
+
+    // =========================================================================
+    // test hasNoCapitals
+
+    string arr15[] = {"a", "d", "c", "b"};
+    assert(hasNoCapitals(arr15, 4) == true); // test with no capitals
+
+    string arr16[] = {"2", "0.1", "4", "5"};
+    assert(hasNoCapitals(arr16, 4) == true); // test with numbers
+
+    string arr17[] = {"2A901238", "0.afhsd484y1a", "4hliequhfo1y18", "5A&*#^)*#&"};
+    assert(hasNoCapitals(arr17, 4) == false); // test with one capital
+
+    string arr18[] = {"", "", "", ""};
+    assert(hasNoCapitals(arr18, 4) == true); // empty strings
+
+    string arr19[] = {"2901238", "0.afhsd484y1a", "4hliequhfo1Y18", "5A&*#^)*#&"};
+    assert(hasNoCapitals(arr19, 3) == false); // test with one capital, n=3
+
+    string arr20[] = {"2901238", "0.afhsd484y1a", "4hliequhfo1Y18", "5A&*#^)*#&"};
+    assert(hasNoCapitals(arr20, 2) == true); // test with one capital, n=2
+    
+    // =========================================================================
+    // test shiftLeft
+
+    string arr21a[] = {"a", "d", "c", "b"};
+    string arr21b[] = {"d", "c", "b", "x"};
+    assert(shiftLeft(arr21a, 4, 1, "x") == 1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr21a[i] == arr21b[i]); // shift left 1
+    }
+    
+    string arr22a[] = {"a", "d", "c", "b"};
+    string arr22b[] = {"b", "x", "x", "x"};
+    assert(shiftLeft(arr22a, 4, 3, "x") == 3);
+    for(int i = 0; i < 4; i++) {
+        assert(arr22a[i] == arr22b[i]); // shift left 3
+    }
+
+    string arr23a[] = {"a", "d", "c", "b"};
+    string arr23b[] = {"x", "x", "x", "x"};
+    assert(shiftLeft(arr23a, 4, 5, "x") == 4);
+    for(int i = 0; i < 4; i++) {
+        assert(arr23a[i] == arr23b[i]); // shift left 5
+    }
+    
+    string arr24a[] = {"a", "d", "c", "b"};
+    string arr24b[] = {"d", "x", "c", "b"};
+    assert(shiftLeft(arr24a, 2, 1, "x") == 1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr24a[i] == arr24b[i]); // shift left 1, n = 2
+    }
+
+    string arr25a[] = {"a", "d", "c", "b"};
+    string arr25b[] = {"d", "x", "c", "b"};
+    assert(shiftLeft(arr25a, 2, 1, "x") == 1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr25a[i] == arr25b[i]); // shift left 1, n = 2
+    }
+
+    string arr26a[] = {"a", "d", "c", "b"};
+    string arr26b[] = {"x", "x", "c", "b"};
+    assert(shiftLeft(arr26a, 2, 3, "x") == 2);
+    for(int i = 0; i < 4; i++) {
+        assert(arr26a[i] == arr26b[i]); // shift left 3, n = 2
+    }
+
+    string arr27a[] = {"a", "d", "c", "b"};
+    string arr27b[] = {"a", "d", "c", "b"};
+    assert(shiftLeft(arr27a, 0, 3, "x") == -1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr27a[i] == arr27b[i]); // n = 0, return -1
+    }
+
+    string arr28a[] = {"a", "d", "c", "b"};
+    string arr28b[] = {"a", "d", "c", "b"};
+    assert(shiftLeft(arr28a, -1, 3, "x") == -1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr28a[i] == arr28b[i]); // n <= 0, return -1
+    }
+
+    string arr29a[] = {"a", "d", "c", "b"};
+    string arr29b[] = {"a", "d", "c", "b"};
+    assert(shiftLeft(arr29a, 4, 0, "x") == 0);
+    for(int i = 0; i < 4; i++) {
+        assert(arr29a[i] == arr29b[i]); // shift 0, should leave array untouched
+    }
+    
+    string arr30a[] = {"", "", "", ""};
+    string arr30b[] = {"", "", "x", ""};
+    assert(shiftLeft(arr30a, 3, 1, "x") == 1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr30a[i] == arr30b[i]); // n = 3, shift 1, empty string array
+    }
+
+    string arr31a[] = {"a", "d", "c", "b"};
+    string arr31b[] = {"a", "d", "c", "b"};
+    assert(shiftLeft(arr31a, 4, -1, "x") == -1);
+    for(int i = 0; i < 4; i++) {
+        assert(arr31a[i] == arr31b[i]); // shift < 0, return -1
+    }
+
+    string arr32a[] = {"a", "d", "c", "b", "e", "f"};
+    string arr32b[] = {"c", "b", "e", "", "", "f"};
+    assert(shiftLeft(arr32a, 5, 2, "") == 2);
+    for(int i = 0; i < 4; i++) {
+        assert(arr31a[i] == arr31b[i]); // n = 5, shift 2, different placeholder
+    }

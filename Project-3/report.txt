@@ -1,0 +1,116 @@
+CS 31, Project 3 Report
+Name: Niklas Leet
+Date: 2/5/2023
+UID: 405795083
+
+(a) The most challenging obstacles I overcame while working on this assignment
+ was the design of the isValidQC function. While I was comparing different
+ strategies in the planning phase of the assignment, I failed to consider
+ formal state based control flow, which would have likely been a tidier
+ approach in retrospect. Validating that batch contained both a p and d in any
+ order was perhaps the most difficult part. Additionally, while designing my
+ strToNum() function, I ran into some difficulties ensuring that the input to
+ stoi() was valid, because some inputs where throwing errors that broke my 
+ program. Although my program seems to work, I am still concerned that some 
+ illegal inputs could cause stoi() to throw an error, which would not be the 
+ correct behavior for an invalid case. To resolve this, I considered rewriting 
+ the functionality of stoi() such that it does not throw an error in the case 
+ of such an unexpected illegal input. But, I have not been able to come up with
+a case for which this has happened, and I believe my program should work for 
+most reasonable inputs. 
+
+(b)
+--------------------------------------------------------------------------------
+* bool isValidQC(string results)
+
+Accepts a QC string and returns false if any of the necessary conditions are 
+invalidated, and true otherwise. Loops through each character in the string 
+checks conditions when it encounters a 'Q', 'p', or 'd' and returns false if it 
+encounters any other non-digit character, or if the string is empty. When the 
+loop encounters a 'Q', the program checks for a subsequent 'p' and 'd' before 
+the end of the next batch, and ensures the following number in the string is 
+valid and nonzero using strToNum(), in which case it adds that converted number 
+to the total tests. At a 'p' or 'd', the program checks if the following number 
+in the string is valid using strToNum(), in which case it adds that converted 
+number to the total passes or defects. When the loop encounters the end of a 
+batch, it checks that the number of tests is nonzero and equal to the sum of 
+passes and defects.
+
+--------------------------------------------------------------------------------
+* int stringToNum(string str)
+
+if: the string has length greater than 1 and begins with 0 followed by a digit
+    OR the string is empty
+    OR the first character is not a digit
+    
+    return -1
+
+Otherwise, return stoi(str)
+
+--------------------------------------------------------------------------------
+* int passQC(string results)
+
+initialize variable passes = 0
+
+if: QC string is not valid
+    return -1
+
+for: loop through each character in results 
+    if: a 'p' is encountered
+        add the number following p to passes
+
+return passes
+
+--------------------------------------------------------------------------------
+* int defect(string results)
+
+Functions in the same way as passQC, except the numbers following every 'd' are 
+summed and returned.
+
+--------------------------------------------------------------------------------
+* int totalQC(string results)
+
+Functions in the same way as passQC, except the numbers following every 'Q' are 
+summed and returned.
+
+--------------------------------------------------------------------------------
+* int batches(string results)
+
+Loops through the inputted string if it is valid and returns the number of 
+times a 'Q' appears. Otherwise, returns -1.
+
+
+--------------------------------------------------------------------------------
+
+(c) 
+
+Valid QC strings:
+
+Q1p0d1Q1d0p1                        (two batches of results, two total tests,
+                                    one pass, one defect)
+Q5d2p3                              (one batch of results, five total tests, 
+                                    two defects, three passes) 
+Q5p3d2                              (p and d can appear in either order)
+
+Invalid QC strings:
+
+q1p0d1                              (batch must be reported with Q) 
+Q1pd1                               (a number for pass is required) 
+Q1p1d                               (a number for defect is required) 
+Q1p0d1   asdfR                      (extra characters not allowed) 
+Q5p00003d0002                       (leading zeros not allowed) 
+Q5p0d0                              (pass and defect results must equal the 
+                                    total number of tests) 
+Q0p0d0                              (batch cannot be zero)
+Q10p-1d11                           (no negative numbers)
+Q5d1p1Q5p4d4                        (tests that tests = passes + defects for    
+                                    individual batches, rather than for all 
+                                    batches)
+""                                  (an empty string is invalid)
+Q7d3hp4                             (extra characters not allowed in QC string)
+Q4 d3 p1                            (no spaces allowed, tests for invalid       
+                                    implementation of stoi)
+
+
+My program passes all of these tests.
+

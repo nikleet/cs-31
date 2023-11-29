@@ -1,0 +1,16 @@
+Name: Niklas Leet
+Project 2
+UID: 405795083
+
+a.  The most notable obstacles I encountered were in the process of checking for erroneous errors.
+    I included a boolean flag to track if an input had been deemed erroneous, and if one had, the
+    code would stop looking for errors. In the condition of the if statements I used to set this
+    up was flawed, and several of the conditions were improperly grouped in parentheses. Eventually, 
+    I stopped using this method in favor of returning -1 in the case of an error. I also
+    made an error in checking whether the day fell within the range of tax free days, placing
+    a greater than sign where a less than sign should have been. Also, I struggled slightly with
+    formatting total such that only two digits after the decimal point were printed.
+
+b.  
+    My program seemed to run perfectly, and I couldn't identify any errors. 
+

@@ -1,0 +1,82 @@
+Name: Niklas Leet
+UID: 405795083
+---------------------------- Invalid Inputs ----------------------------
+
+C:\Users\Niklas\Projects\C++\cs-31\Project 1>.\original.exe
+How many Electoral College electors are there? 255
+How many of these electors voted for the Republican party candidate? 110
+How many of these electors voted for the Democratic party candidate? 150
+
+43.1% of the 255 electors voted for the Republican party candidate.
+58.8% of the 255 electors voted for the Democratic party candidate.
+
+Looks like the Democratic party candidate won!
+Looks like some of these data values don't make sense.
+
+>> The number of votes is greater than the number of electors. The percentages sum to a value greater than 100 percent.
+
+--------------
+
+C:\Users\Niklas\Projects\C++\cs-31\Project 1>.\original.exe
+How many Electoral College electors are there? 0
+How many of these electors voted for the Republican party candidate? 10    
+How many of these electors voted for the Democratic party candidate? 20    
+
+inf% of the 0 electors voted for the Republican party candidate.
+inf% of the 0 electors voted for the Democratic party candidate.
+
+Looks like some of these data values don't make sense.
+
+>> The number of electors is zero. A division error causes the percentage to become infinity.
+
+--------------
+
+C:\Users\Niklas\Projects\C++\cs-31\Project 1>.\original.exe  
+How many Electoral College electors are there? -100
+How many of these electors voted for the Republican party candidate? 10    
+How many of these electors voted for the Democratic party candidate? 20    
+
+-10.0% of the -100 electors voted for the Republican party candidate.      
+-20.0% of the -100 electors voted for the Democratic party candidate.      
+
+Looks like the Republican party candidate won!
+Looks like some of these data values don't make sense.
+
+>> The number of electors is negative.
+
+---------------------------- Logic Error ----------------------------
+
+Line 27: double pctRepub = ( 100.0 / republicanVotes ) * totalVoters;
+
+Line 28: double pctDemoc = ( 100.0 / democraticVotes ) * totalVoters;
+
+
+The code calculates the reciprocal of the desired percentage.
+The logic error was introduced by exchanging the multiplication 
+and division symbols in the two lines above.
+
+---------------------------- Compile Error ----------------------------
+
+Line 15: cout << "How many Electoral College electors are there? "
+                                                                  ^
+                                                                  ;
+                                                          missing semicolon
+
+Line 37: cout << pctRepub << "% of the " << totalVoters << " electors voted for the Republican party candidate. << endl;
+                                                                                                               ^
+                                                                                                               " 
+                                                                                                    missing quotation mark
+
+Compiler errors
+C:\Users\Niklas\Projects\C++\cs-31\Project 1\compile_error.cpp:15:58: error: expected ';' before 'cin'
+   15 | cout << "How many Electoral College electors are there? "
+      |                                                          ^
+      |                                                          ;
+...
+C:\msys64\mingw64\bin\g++.exe -fdiagnostics-color=always -g "C:\Users\Niklas\Projects\C++\cs-31\Project 1\compile_error.cpp" -o "C:\Users\Niklas\Projects\C++\cs-31\Project 1\compile_error.exe"
+C:\Users\Niklas\Projects\C++\cs-31\Project 1\compile_error.cpp:37:51: warning: missing terminating " character
+   37 | cout << pctRepub << "% of the " << totalVoters << " electors voted for the Republican party candidate. << endl;
+      |                                                   ^
+C:\Users\Niklas\Projects\C++\cs-31\Project 1\compile_error.cpp:37:51: error: missing terminating " character
+   37 | cout << pctRepub << "% of the " << totalVoters << " electors voted for the Republican party candidate. << endl;
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     

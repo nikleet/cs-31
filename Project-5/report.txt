@@ -1,0 +1,33 @@
+CS 31, Project 5, report.txt
+Name: Niklas Leet
+UID: 405795083
+Date: 3/5/2023
+
+a.  This project went relatively smoothly with few obstacles. I at first made a 
+    mistake in the setTo() function for PlaneFlight, where I accidentally
+    compared the to string against itself as opposed to mFrom. Also, I initially
+    forgot to make freeFlight() return false if it is passed invalid parameters
+    for from, to, or mileage.
+
+b.  In addition to the provided testing code, I included the following cases:
+
+*   Test PlaneFlight and FrequenFlyerAccount constructors for basic 
+    functionality (account balance starts at zero). 
+*   Providing invalid values to the contructor should create a PlaneFlight w/
+    mName = null, mFrom = null, mTo = null, mileage = -1, cost = -1
+*   Test accessors for basic functionality
+*   Test mutators for basic functionality
+*   Ensure that setting the from city to the same string as the to city does not
+    change the from city.
+*   PlaneFlight mutators do not store same origin and destination (values should
+    remain unchanged).
+*   Ensure that adding a non zero cost flight to an account increases account
+    balance
+*   Ensure that adding a zero cost flight to an account does not increase the
+    mileage balance.
+*   Ensure canEarnFreeFlight() returns true with a sufficient balance (and
+    converse).
+*   Ensure creating a free flight with valid parameters reduces mileage balance
+    and returns true (and converse)
+       
+
